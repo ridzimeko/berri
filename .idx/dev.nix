@@ -7,6 +7,7 @@
   packages = [
     pkgs.nodejs_20
     pkgs.nodePackages.pnpm
+    pkgs.openssl
     # pkgs.nodePackages.nodemon
   ];
   # Sets environment variables in the workspace

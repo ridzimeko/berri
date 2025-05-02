@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node ./dist/index.js",
-    "dev": "node --loader ts-node/esm --no-warnings src/index.ts"
+    "generate:prisma": "prisma generate",
+    "dev": "node --import=tsx --no-warnings src/index.ts"
   },
   "keywords": [],
   "author": "",
@@ -18,11 +19,11 @@
     "dotenv": "^16.5.0",
     "graphql": "^16.10.0",
     "jsonwebtoken": "^9.0.2",
-    "prisma": "^6.6.0"
+    "prisma": "^6.6.0",
+    "tsx": "^4.19.4"
   },
   "devDependencies": {
     "@types/node": "^22.14.0",
-    "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }
 }
