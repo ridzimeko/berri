@@ -8,10 +8,16 @@
     pkgs.nodejs_20
     pkgs.nodePackages.pnpm
     pkgs.openssl
+    pkgs.postgresql
     # pkgs.nodePackages.nodemon
   ];
   # Sets environment variables in the workspace
   env = {};
+
+  services.postgres = {
+    enable = true;  
+  };
+
   idx = {
     # Search for the extensions you want on https://open-vsx.org/ and use "publisher.id"
     extensions = [
@@ -44,6 +50,12 @@
         # npm-install = "npm install";
         # Open editors for the following files by default, if they exist:
         default.openFiles = [ "README.md" ];
+
+        # setup postgres
+        setup = ''
+          psql --dbname=postgres -c "ALTER USER \"user\" PASSWORD 'mypassword';"
+          psql --dbname=postgres -c "CREATE DATABASE berri;"
+        '';
       };
       # Runs when the workspace is (re)started
       onStart = {

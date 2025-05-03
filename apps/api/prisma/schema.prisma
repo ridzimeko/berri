@@ -9,38 +9,38 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
-  username  String   @unique
-  email     String   @unique
+  id        String    @id @default(uuid())
+  username  String    @unique
+  email     String    @unique
   password  String
-  servers   Server[] @relation("ServerMembers")
+  createdAt DateTime  @default(now())
   messages  Message[]
-  createdAt DateTime @default(now())
+  servers   Server[]  @relation("ServerMembers")
 }
 
 model Server {
   id        String    @id @default(uuid())
   name      String
-  members   User[]    @relation("ServerMembers")
-  channels  Channel[]
   createdAt DateTime  @default(now())
+  channels  Channel[]
+  members   User[]    @relation("ServerMembers")
 }
 
 model Channel {
-  id        String   @id @default(uuid())
+  id        String    @id @default(uuid())
   name      String
-  server    Server   @relation(fields: [serverId], references: [id])
   serverId  String
+  createdAt DateTime  @default(now())
+  server    Server    @relation(fields: [serverId], references: [id])
   messages  Message[]
-  createdAt DateTime @default(now())
 }
 
 model Message {
   id        String   @id @default(uuid())
   content   String
-  author    User     @relation(fields: [authorId], references: [id])
   authorId  String
-  channel   Channel  @relation(fields: [channelId], references: [id])
   channelId String
   createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  channel   Channel  @relation(fields: [channelId], references: [id])
 }
